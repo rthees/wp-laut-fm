@@ -3,7 +3,7 @@
  Plugin Name: laut.fm for Wordpress
  Plugin URI: http://herrthees.de/wp-laut-fm
  Description: Displays data for a webradio-station hostet on laut.fm
- Version: 0.1.1
+ Version: 0.1.2
  Author: Ralf Thees
  Author URI: http://herrthees.de
  License: GPL2
@@ -48,7 +48,7 @@ if (!class_exists('WPlautfm_Widget')) {
 			echo '</div>';
 			echo $after_widget;
 		}
-
+		
 		function stylesheet() {
 
 			wp_enqueue_style('wplautfm', plugins_url('/wplautfm.css', __FILE__));
