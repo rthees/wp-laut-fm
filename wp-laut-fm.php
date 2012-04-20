@@ -3,7 +3,7 @@
 Plugin Name: laut.fm for Wordpress
 Plugin URI: http://herrthees.de/wp-laut-fm
 Description: Displays data for a webradio-station hostet on laut.fm
-Version: 0.1
+Version: 0.1.1
 Author: Ralf Thees
 Author URI: http://herrthees.de
 License: GPL2
@@ -19,6 +19,8 @@ class WPlautfmPlugin {
 	var $wlfOptionKey = 'wp-laut-fm_Options';
 	
 	var $lautfmApiUrl = 'http://api.laut.fm/';
+	
+	static $CURRENTINSTANCENUMBER = 1;
 	
 	function WPlautfmPlugin() {
 		
@@ -43,7 +45,9 @@ class WPlautfmPlugin {
 	function getLautfmData () {
 		$geturl=$this->lautfmApiUrl."station/".$this->getOption('station_name');
 		$json_station =  wp_remote_retrieve_body(wp_remote_get($geturl));
-		$obj_station = json_decode($json_station);
+		$obj_station['studio'] = json_decode($json_station);
+		$obj_station['listeners']=json_decode(wp_remote_retrieve_body(wp_remote_get($obj_station['studio']->api_urls->listeners)));
+		$obj_station['current_song']=json_decode(wp_remote_retrieve_body(wp_remote_get($obj_station['studio']->api_urls->current_song)));
 		return $obj_station;
 	}
 	
@@ -52,7 +56,7 @@ class WPlautfmPlugin {
 			// Default-Werte
 			$options = array
 			(
-				'station_name' => '',
+				'station_name' => 'wuerzblog',
 				'data_cache_time' => 10
 			);
 			
@@ -85,6 +89,15 @@ class WPlautfmPlugin {
 	
 }
 
+
+if(!function_exists('load_wplautfm')):		
+		add_action( 'widgets_init', 'load_wplautfm' );
+		function load_wplautfm() 
+		{
+			register_widget( 'WPlautfm_Widget' );
+		}
+	endif;
+
 /**
 	 * Plugin instanzieren
 	 */
@@ -94,6 +107,8 @@ class WPlautfmPlugin {
 		{
 			register_activation_hook(__FILE__, array(&$WPlautfmPlugin, 'install'));
 		}
-		// print_r($WPlautfmPlugin->getLautfmData());
+		print_r($WPlautfmPlugin->getLautfmData());
 	endif;
+	
+	include('widget.php');
 ?>
