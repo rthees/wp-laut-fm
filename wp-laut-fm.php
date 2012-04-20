@@ -9,7 +9,7 @@
  License: GPL2
  */
 
-// Sprachdatei
+
 if (!load_plugin_textdomain('wplautfm', '/wp-content/languages/'))
 	load_plugin_textdomain('wplautfm', '/wp-content/plugins/wp-laut-fm/languages/');
 
