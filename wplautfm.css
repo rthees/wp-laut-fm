@@ -1,9 +1,32 @@
-﻿.wlf_widget_listeners {
-	float:left;
+﻿.wlf_widget_container {
+	xwidth: 150px;
+}
+
+.wlf_widget_container strong {
+	xfont-variant: small-caps;
+	text-transform: uppercase;
+	font-size: 1.2em;
+}
+
+.wlf_widget_imgbox {
+	-o-background-size: 100% 100%, auto;
+	-moz-background-size: 100% 100%, auto;
+	-webkit-background-size: 100% 100%, auto;
+	background-size: 100% 100%, auto;
+	width: 150px;
+	height: 150px;
+}
+
+.wlf_widget_listeners {
 	width: 3em;
-	height: 1em;
-	font-size: 8em;
+	font-size: 4em;
 	font-family: Georgia;
 	font-weight: bold;
 	color: #fff;
+	padding: 5px;
 }
+
+.wlf_widget_listeners small {
+	font-size: 0.5em;
+}
+
