@@ -46,7 +46,7 @@ if (!class_exists('WPlautfm_Widget')) {
 			echo '<div class="wlf_widget_imgbox" style="background-image: url('.$data['station']->images->station_120x120.'); background-repeat: no-repeat; ">';
 			echo '<div class="wlf_widget_listeners">'.$data['listeners'].'<br/><small>'.__('Hörer','wplautfm').'</small></div>';
 			echo '</div><p><strong><a href="'.$data['station']->page_url.'">'.$data['station'] -> name . "</a></strong><br/>\n" . $data['station'] -> format.'</p>';
-			echo '<div>'.$data['current_song']->title.'</div>';
+			echo '<div>'.$data['current_song']->title.'von '.$data['current_song']->artist.'</div>';
 			echo '</div>';
 			echo $after_widget;
 		}
