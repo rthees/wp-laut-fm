@@ -46,6 +46,7 @@ if (!class_exists('WPlautfm_Widget')) {
 			echo '<div class="wlf_widget_imgbox" style="background-image: url('.$data['station']->images->station_120x120.'); background-repeat: no-repeat; ">';
 			echo '<div class="wlf_widget_listeners">'.$data['listeners'].'<br/><small>'.__('Hörer','wplautfm').'</small></div>';
 			echo '</div><p><strong><a href="'.$data['station']->page_url.'">'.$data['station'] -> name . "</a></strong><br/>\n" . $data['station'] -> format.'</p>';
+			echo '<div>'.$data['current_song'].'</div>'
 			echo '</div>';
 			echo $after_widget;
 		}
@@ -81,6 +82,7 @@ if (!class_exists('WPlautfm_Widget')) {
 			$obj_station['station'] = json_decode($json_station);
 			$obj_station['listeners'] = json_decode(wp_remote_retrieve_body(wp_remote_get($obj_station['station'] -> api_urls -> listeners)));
 			$obj_station['current_song'] = json_decode(wp_remote_retrieve_body(wp_remote_get($obj_station['station'] -> api_urls -> current_song)));
+			$obj_station['current_playlist'] = json_decode(wp_remote_retrieve_body(wp_remote_get($obj_station['station'] -> current_playlist)));
 
 /*
 			$geturl = $this -> lautfmApiUrl . "stations?limit=9999";		
